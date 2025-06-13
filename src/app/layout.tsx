@@ -7,7 +7,7 @@ export default function RootLayout({children,}: {children: React.ReactNode;}) {
   return (
     <ProductProvider>
       <html lang="en">
-        <body id="mainBody">{children}</body>
+        <body>{children}</body>
       </html>
     </ProductProvider>
   );

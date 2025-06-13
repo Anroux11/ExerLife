@@ -1,10 +1,19 @@
 import { createStyles, css } from "antd-style";
 
 export const useStyles = createStyles({
+  page: css`
+    height: 100%;
+    width: 100%;
+    align-content: center;
+  `,
   container: css`
-    align-tems: center;
     justify-items: center;
-    justify-content: center;
+    align-content: center;
+  `,
+  nav: css`
+    position: fixed;
+    top: 0;
+    width: inherit; 
   `,
   bigHeading: css`
     font-size: 3rem;
@@ -18,7 +27,7 @@ export const useStyles = createStyles({
     align-items: center;
     justify-items: center;
   `,
-  butContainer: css`
+  buttonContainer: css`
     margin-top: 0.5rem;
   `,
   Button: css`

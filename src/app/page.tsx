@@ -18,16 +18,21 @@ const Page: React.FC = () => {
   };
   return (
     <ProductProvider>
-      <div>
-        <Header />
+      <div className={styles.page}>
+        <div className={styles.nav}>
+          <Header />
+        </div>
+
         <div className={styles.container}>
-          <div>
+          <>
             <h1 className={styles.bigHeading}>Hello</h1>
-          </div>
-          <div>
+          </>
+
+          <>
             <h2 className={styles.smallHeading}>Hello</h2>
-          </div>
-          <div className={styles.butContainer}>
+          </>
+
+          <div className={styles.buttonContainer}>
             <Button
               className={styles.Button}
               color="primary"
