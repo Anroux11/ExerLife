@@ -75,5 +75,6 @@ export const MealplanStateContext =
   createContext<IMealplanStateContext>(INITIAL_STATE);
 
 // 2. ProductActionContext - Holds the methods to interact with our products
-export const MealplanActionContext =
-  createContext<IMealplanActionContext>(undefined);
+export const MealplanActionContext = createContext<undefined | IMealplanActionContext>(
+  undefined
+);

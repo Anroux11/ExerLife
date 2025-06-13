@@ -7,18 +7,6 @@ export const TrainerReducer = handleActions<
   ITrainerStateContext
 >(
   {
-    [TrainerActionEnums.getTrainersPending]: (state, action) => ({
-      ...state,
-      ...action.payload,
-    }),
-    [TrainerActionEnums.getTrainersSuccess]: (state, action) => ({
-      ...state,
-      ...action.payload,
-    }),
-    [TrainerActionEnums.getTrainersError]: (state, action) => ({
-      ...state,
-      ...action.payload,
-    }),
     [TrainerActionEnums.getTrainerPending]: (state, action) => ({
       ...state,
       ...action.payload,

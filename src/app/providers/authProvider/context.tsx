@@ -35,8 +35,9 @@ export const INITIAL_STATE_TRAINER: ITrainerRegisterStateContext = {
 export const TrainerRegisterStateContext =
   createContext<ITrainerRegisterStateContext>(INITIAL_STATE_TRAINER);
 
-export const TrainerRegisterActionContext =
-  createContext<ITrainerRegisterActionContext>(undefined);
+export const TrainerRegisterActionContext = createContext<
+  undefined | ITrainerRegisterActionContext
+>(undefined);
 
 
 export interface IClientRegister {
@@ -73,8 +74,9 @@ export const ClientRegisterStateContext =
   createContext<IClientRegisterStateContext>(INITIAL_STATE_CLIENT);
 
 
-export const ClientRegisterActionContext =
-  createContext<IClientRegsiterActionContext>(undefined);
+export const ClientRegisterActionContext = createContext<
+  undefined | IClientRegsiterActionContext
+>(undefined);
 
 
 export interface IUserLogin {
@@ -106,7 +108,7 @@ export const UserLoginStateContext =
   createContext<IUserLoginStateContext>(INITIAL_STATE_USER);
 
 export const UserLoginActionContext =
-  createContext<IUserLoginActionContext>(undefined);
+  createContext<undefined|IUserLoginActionContext>(undefined);
 
 export interface ICurrentUser {
   id: string;
@@ -144,6 +146,6 @@ export const CurrentUserStateContext = createContext<ICurrentUserStateContext>(
 );
 
 export const CurrentUserActionContext =
-  createContext<ICurrentUserActionContext>(undefined);
+  createContext<undefined|ICurrentUserActionContext>(undefined);
 
 

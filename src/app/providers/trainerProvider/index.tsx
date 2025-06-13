@@ -8,9 +8,6 @@ import {
 import { TrainerReducer } from "./reducer";
 import { useContext, useReducer } from "react";
 import {
-  getTrainersSuccess,
-  getTrainersPending,
-  getTrainersError,
   getTrainerPending,
   getTrainerError,
   createTrainerPending,
@@ -22,8 +19,8 @@ import {
   deleteTrainerPending,
   deleteTrainerSuccess,
   deleteTrainerError,
+  getTrainerSuccess,
 } from "./actions";
-import axios from "axios";
 
 export const TrainerProvider = ({
   children,
@@ -33,26 +30,13 @@ export const TrainerProvider = ({
   const [state, dispatch] = useReducer(TrainerReducer, INITIAL_STATE);
   const instance = getAxiosInstace();
 
-  const getTrainers = async () => {
-    dispatch(getTrainersPending());
-    const endpoint = `https://fakestoreapi.com/products`;
-    await axios(endpoint)
-      .then((response) => {
-        dispatch(getTrainersSuccess(response.data));
-      })
-      .catch((error) => {
-        console.error(error);
-        dispatch(getTrainersError());
-      });
-  };
-
   const getTrainer = async (id: string) => {
     dispatch(getTrainerPending());
     const endpoint = `/trainers/${id}`;
     await instance
       .get(endpoint)
       .then((response) => {
-        dispatch(getTrainersSuccess(response.data));
+        dispatch(getTrainerSuccess(response.data));
       })
       .catch((error) => {
         console.error(error);
@@ -106,7 +90,6 @@ export const TrainerProvider = ({
     <TrainerStateContext.Provider value={state}>
       <TrainerActionContext.Provider
         value={{
-          getTrainers,
           getTrainer,
           createTrainer,
           updateTrainer,

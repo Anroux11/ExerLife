@@ -45,5 +45,6 @@ export const ClientStateContext =
   createContext<IClientStateContext>(INITIAL_STATE);
 
 // 2. ProductActionContext - Holds the methods to interact with our products
-export const ClientActionContext =
-  createContext<IClientActionContext>(undefined);
+export const ClientActionContext = createContext<undefined | IClientActionContext>(
+  undefined
+);

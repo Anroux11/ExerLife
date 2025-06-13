@@ -25,7 +25,6 @@ export interface ITrainerStateContext {
 // Interface defining all the actions that can be performed on our products
 // These methods will be implemented in the provider component
 export interface ITrainerActionContext {
-  getTrainers: () => void; // Fetch all products
   getTrainer: (id: string) => void; // Fetch a single product
   createTrainer: (trainer: ITrainer) => void; // Create a new product
   updateTrainer: (trainer: ITrainer) => void; // Update existing product
@@ -45,5 +44,6 @@ export const TrainerStateContext =
   createContext<ITrainerStateContext>(INITIAL_STATE);
 
 // 2. ProductActionContext - Holds the methods to interact with our products
-export const TrainerActionContext =
-  createContext<ITrainerActionContext>(undefined);
+export const TrainerActionContext = createContext<undefined | ITrainerActionContext>(
+  undefined
+);

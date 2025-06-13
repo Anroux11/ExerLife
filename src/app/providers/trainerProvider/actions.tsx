@@ -28,42 +28,6 @@ export enum TrainerActionEnums {
   deleteTrainerError = "DELETE_TRAINER_ERROR",
 }
 
-// createAction<PayloadType>(actionType, payloadCreator)
-// - PayloadType: The type of data the action will contain
-// - actionType: The string identifier for this action
-// - payloadCreator: Function that returns the action payload
-
-// Get All Products Actions
-export const getTrainersPending = createAction<ITrainerStateContext>(
-  TrainerActionEnums.getTrainersPending,
-  // Returns state object indicating loading started
-  () => ({ isPending: true, isSuccess: false, isError: false })
-);
-
-// Example of createAction with multiple generic types:
-// createAction<ReturnType, PayloadType>
-export const getTrainersSuccess = createAction<
-  ITrainerStateContext, // What the payload creator returns
-  ITrainer[] // Type of argument passed to payload creator
->(
-  TrainerActionEnums.getTrainersSuccess,
-  // Receives products array and returns state with products
-  (trainers: ITrainer[]) => ({
-    isPending: false,
-    isSuccess: true,
-    isError: false,
-    trainers, // Include fetched products in state
-  })
-);
-
-export const getTrainersError = createAction<ITrainerStateContext>(
-  TrainerActionEnums.getTrainersError,
-  // Returns state object indicating error occurred
-  () => ({ isPending: false, isSuccess: false, isError: true })
-);
-
-// Single Product Actions
-// Similar pattern: each action updates the state to reflect the operation status
 export const getTrainerPending = createAction<ITrainerStateContext>(
   TrainerActionEnums.getTrainerPending,
   () => ({ isPending: true, isSuccess: false, isError: false })

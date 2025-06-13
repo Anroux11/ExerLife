@@ -44,5 +44,6 @@ export const ProductStateContext =
   createContext<IProductStateContext>(INITIAL_STATE);
 
 // 2. ProductActionContext - Holds the methods to interact with our products
-export const ProductActionContext =
-  createContext<IProductActionContext>(undefined);
+export const ProductActionContext = createContext<undefined | IProductActionContext>(
+  undefined
+);

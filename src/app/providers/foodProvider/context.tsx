@@ -49,5 +49,6 @@ export const FooditemStateContext =
   createContext<IFooditemStateContext>(INITIAL_STATE);
 
 // 2. ProductActionContext - Holds the methods to interact with our products
-export const FooditemActionContext =
-  createContext<IFooditemActionContext>(undefined);
+export const FooditemActionContext = createContext<undefined | IFooditemActionContext>(
+  undefined
+);
