@@ -11,7 +11,7 @@ export interface IMealplan {
   notes: string;
   clientNotes: [];
   meals: IMeal[];
-  mealTotals: string;
+  mealTotals: IMealTotal[];
 }
 
 export interface IMeal {
@@ -20,9 +20,27 @@ export interface IMeal {
   note: string;
   clientNotes: [];
   items: IMealItem[];
-  itemTotals: IMealTotal;
+  itemTotals: IMealTotal[];
 }
 
+
+export interface IMealItem {
+  name: string;
+  quantity: number;
+  unit: string;
+  calories: number;
+  carbs: number;
+  protein: number;
+  fat: number;
+  note: string;
+}
+
+export interface IMealTotal{
+  calories: number;
+  carbs: number;
+  protein: number;
+  fat: number;
+}
 
 
 // Interface defining the state shape for our context

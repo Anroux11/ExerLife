@@ -1,5 +1,5 @@
 import { createAction } from "redux-actions"
-import { ITrainerRegister, ITrainerRegisterStateContext, IClientRegister, IClientRegisterStateContext, ITrainerLoginStateContext, ITrainerLogin, IClientLoginStateContext, IClientLogin } from "./context";
+import { ITrainerRegister, ITrainerRegisterStateContext, IClientRegister, IClientRegisterStateContext, IUserLogin, ICurrentUser, IUserLoginStateContext, ICurrentUserStateContext } from "./context";
 
 // Enum defining the type of actions that can be dispatched
 export enum TrainerRegisterActionEnums {
@@ -14,16 +14,16 @@ export enum ClientRegisterActionEnum {
   getRegisterClientError = "GET_REGISTER_CLIENT_ERROR",
 }
 
-export enum TrainerLoginActionEnum {
-  getLoginTrainerPending = "GET_LOGIN_TRAINER_PENDING",
-  getLoginTrainerSuccess = "GET_LOGIN_TRAINER_SUCCESS",
-  getLoginTrainerError = "GET_LOGIN_TRAINER_ERROR",
+export enum UserLoginActionEnum {
+  getUserLoginPending = "GET_USER_LOGIN_PENDING",
+  getUserLoginSuccess = "GET_USER_LOGIN_SUCCESS",
+  getUserLoginError = "GET_USER_LOGIN_ERROR",
 }
 
-export enum ClientLoginActionEnum {
-  getLoginClientPending = "GET_LOGIN_CLIENT_PENDING",
-  getLoginClientSuccess = "GET_LOGIN_CLIENT_SUCCESS",
-  getLoginClientError = "GET_LOGIN_CLIENT_ERROR",
+export enum CurrentUserActionEnum {
+  getCurrentUserPending = "GET_CURRENT_USER_PENDING",
+  getCurrentUserSuccess = "GET_CURRENT_USER_SUCCESS",
+  getCurrentUserError = "GET_CURRENT_USER_ERROR",
 }
 
 export const getRegisterTrainerPending = createAction<ITrainerRegisterStateContext>(
@@ -70,11 +70,11 @@ export const getRegisterClientSuccess = createAction<
 >(
   ClientRegisterActionEnum.getRegisterClientSuccess,
   // Receives products array and returns state with products
-  (client: IClientRegister) => ({
+  (clients: IClientRegister[]) => ({
     isPending: false,
     isSuccess: true,
     isError: false,
-    client, // Include fetched products in state
+    clients, // Include fetched products in state
   })
 );
 
@@ -86,60 +86,60 @@ export const getRegisterClientError = createAction<IClientRegisterStateContext>(
 
 
 
-export const getLoginTrainerPending = createAction<ITrainerLoginStateContext>(
-  TrainerLoginActionEnum.getLoginTrainerPending,
+export const getUserLoginPending = createAction<IUserLoginStateContext>(
+  UserLoginActionEnum.getUserLoginPending,
   // Returns state object indicating loading started
   () => ({ isPending: true, isSuccess: false, isError: false })
 );
 
 // Example of createAction with multiple generic types:
 // createAction<ReturnType, PayloadType>
-export const getLoginTrainerSuccess = createAction<
-  ITrainerLoginStateContext, // What the payload creator returns
-  ITrainerLogin[] // Type of argument passed to payload creator
+export const getUserLoginSuccess = createAction<
+  IUserLoginStateContext, // What the payload creator returns
+  IUserLogin[] // Type of argument passed to payload creator
 >(
-  TrainerLoginActionEnum.getLoginTrainerSuccess,
+  UserLoginActionEnum.getUserLoginSuccess,
   // Receives products array and returns state with products
-  (trainers: ITrainerLogin[]) => ({
+  (users: IUserLogin[]) => ({
     isPending: false,
     isSuccess: true,
     isError: false,
-    trainers, // Include fetched products in state
+    users, // Include fetched products in state
   })
 );
 
-export const getLoginTrainerError = createAction<ITrainerLoginStateContext>(
-  TrainerLoginActionEnum.getLoginTrainerError,
+export const getUserLoginError = createAction<IUserLoginStateContext>(
+  UserLoginActionEnum.getUserLoginError,
   // Returns state object indicating error occurred
   () => ({ isPending: false, isSuccess: false, isError: true })
 );
 
 
 
-export const getLoginClientPending = createAction<IClientLoginStateContext>(
-  ClientLoginActionEnum.getLoginClientPending,
+export const getCurrentUserPending = createAction<ICurrentUserStateContext>(
+  CurrentUserActionEnum.getCurrentUserPending,
   // Returns state object indicating loading started
   () => ({ isPending: true, isSuccess: false, isError: false })
 );
 
 // Example of createAction with multiple generic types:
 // createAction<ReturnType, PayloadType>
-export const getLoginClientSuccess = createAction<
-  IClientLoginStateContext, // What the payload creator returns
-  IClientLogin[] // Type of argument passed to payload creator
+export const getCurrentUserSuccess = createAction<
+  ICurrentUserStateContext, // What the payload creator returns
+  ICurrentUser[] // Type of argument passed to payload creator
 >(
-  ClientLoginActionEnum.getLoginClientSuccess,
+  CurrentUserActionEnum.getCurrentUserSuccess,
   // Receives products array and returns state with products
-  (clients: IClientLogin[]) => ({
+  (currentuser: ICurrentUser[]) => ({
     isPending: false,
     isSuccess: true,
     isError: false,
-    clients, // Include fetched products in state
+    currentuser, // Include fetched products in state
   })
 );
 
-export const getLoginClientError = createAction<IClientLoginStateContext>(
-  ClientLoginActionEnum.getLoginClientError,
+export const getCurrentUserError = createAction<ICurrentUserStateContext>(
+  CurrentUserActionEnum.getCurrentUserError,
   // Returns state object indicating error occurred
   () => ({ isPending: false, isSuccess: false, isError: true })
 );

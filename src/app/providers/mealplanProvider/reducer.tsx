@@ -2,8 +2,8 @@ import { handleActions } from "redux-actions";
 import {
   INITIAL_STATE,
   IMealplanStateContext,
-} from "../clientProvider/context";
-import { MealplanActionEnums } from "../clientProvider/actions";
+} from "./context";
+import { MealplanActionEnums } from "./actions";
 
 export const MealplanReducer = handleActions<
   IMealplanStateContext,

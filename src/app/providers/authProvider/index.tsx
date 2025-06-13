@@ -1,20 +1,23 @@
 import { getAxiosInstace } from "../../(utils)/axiosInstance";
 import {
-  INITIAL_STATE,
   TrainerRegisterStateContext,
   TrainerRegisterActionContext,
   ClientRegisterStateContext,
   ClientRegisterActionContext,
-  TrainerLoginStateContext,
-  TrainerLoginActionContext,
-  ClientLoginStateContext,
-  ClientLoginActionContext,
+  UserLoginStateContext,
+  UserLoginActionContext,
+  CurrentUserStateContext,
+  CurrentUserActionContext,
+  INITIAL_STATE_TRAINER,
+  INITIAL_STATE_CLIENT,
+  INITIAL_STATE_USER,
+  INITIAL_STATE_CURRENT,
 } from "./context";
 import {
-  LoginClientReducer,
-  LoginTrainerReducer,
+  CurrentUserReducer,
   RegisterClientReducer,
   RegisterTrainerReducer,
+  UserLoginReducer,
 } from "./reducer";
 import { useContext, useReducer } from "react";
 import {
@@ -24,12 +27,12 @@ import {
   getRegisterClientSuccess,
   getRegisterClientPending,
   getRegisterClientError,
-  getLoginTrainerSuccess,
-  getLoginTrainerPending,
-  getLoginTrainerError,
-  getLoginClientPending,
-  getLoginClientSuccess,
-  getLoginClientError,
+  getUserLoginPending,
+  getUserLoginSuccess,
+  getUserLoginError,
+  getCurrentUserPending,
+  getCurrentUserSuccess,
+  getCurrentUserError,
 } from "./actions";
 
 export const TrainerRegisterProvider = ({
@@ -37,12 +40,12 @@ export const TrainerRegisterProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [state, dispatch] = useReducer(RegisterTrainerReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(RegisterTrainerReducer, INITIAL_STATE_TRAINER);
   const instance = getAxiosInstace();
 
-  const getRegisterTrainer = async (id: string) => {
+  const registerTrainer = async (id: string) => {
     dispatch(getRegisterTrainerPending());
-    const endpoint = `/trainers/${id}`;
+    const endpoint = `/api/users/register${id}`;
     await instance
       .get(endpoint)
       .then((response) => {
@@ -58,7 +61,7 @@ export const TrainerRegisterProvider = ({
     <TrainerRegisterStateContext.Provider value={state}>
       <TrainerRegisterActionContext.Provider
         value={{
-          getRegisterTrainer,
+          registerTrainer,
         }}
       >
         {children}
@@ -92,12 +95,12 @@ export const ClientRegisterProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [state, dispatch] = useReducer(RegisterClientReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(RegisterClientReducer, INITIAL_STATE_CLIENT);
   const instance = getAxiosInstace();
 
-  const getRegisterClient = async (id: string) => {
+  const registerClient = async (id: string) => {
     dispatch(getRegisterClientPending());
-    const endpoint = `/Clients/${id}`;
+    const endpoint = `/api/users/register/mobile${id}`;
     await instance
       .get(endpoint)
       .then((response) => {
@@ -113,7 +116,7 @@ export const ClientRegisterProvider = ({
     <ClientRegisterStateContext.Provider value={state}>
       <ClientRegisterActionContext.Provider
         value={{
-          getRegisterClient,
+          registerClient,
         }}
       >
         {children}
@@ -142,154 +145,112 @@ export const useRegisterClientActions = () => {
   return context;
 };
 
-export const TrainerLoginProvider = ({
+export const UserLoginProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [state, dispatch] = useReducer(LoginTrainerReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(UserLoginReducer, INITIAL_STATE_USER);
   const instance = getAxiosInstace();
 
-  const getLoginTrainer = async (id: string) => {
-    dispatch(getLoginTrainerPending());
-    const endpoint = `/trainers/${id}`;
+  const userLogin = async (id: string) => {
+    dispatch(getUserLoginPending());
+    const endpoint = ` /api/users/login${id}`;
     await instance
       .get(endpoint)
       .then((response) => {
-        dispatch(getLoginTrainerSuccess(response.data));
+        dispatch(getUserLoginSuccess(response.data));
       })
       .catch((error) => {
         console.error(error);
-        dispatch(getLoginTrainerError());
+        dispatch(getUserLoginError());
       });
   };
 
   return (
-    <TrainerLoginStateContext.Provider value={state}>
-      <TrainerLoginActionContext.Provider
+    <UserLoginStateContext.Provider value={state}>
+      <UserLoginActionContext.Provider
         value={{
-          getLoginTrainer,
+          userLogin,
         }}
       >
         {children}
-      </TrainerLoginActionContext.Provider>
-    </TrainerLoginStateContext.Provider>
+      </UserLoginActionContext.Provider>
+    </UserLoginStateContext.Provider>
   );
 };
 
-export const useLoginTrainertState = () => {
-  const context = useContext(TrainerLoginStateContext);
+export const useUserLoginState = () => {
+  const context = useContext(UserLoginStateContext);
   if (!context) {
     throw new Error(
-      "useLoginTrainerState must be used within a LoginTrainerProvider"
+      "useUserLoginState must be used within a UserLoginProvider"
     );
   }
   return context;
 };
 
-export const useLoginTrainerActions = () => {
-  const context = useContext(TrainerLoginActionContext);
+export const useUserLoginActions = () => {
+  const context = useContext(UserLoginActionContext);
   if (!context) {
     throw new Error(
-      "useLoginTrainerActions must be used within a LoginTrainerProvider"
+      "useUserLoginActions must be used within a UserLoginProvider"
     );
   }
   return context;
 };
 
-export const ClientLoginProvider = ({
+export const CurrentUserProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [state, dispatch] = useReducer(LoginClientReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(CurrentUserReducer, INITIAL_STATE_CURRENT);
   const instance = getAxiosInstace();
 
-  const getLoginClient = async (id: string) => {
-    dispatch(getLoginClientPending());
-    const endpoint = `/Trainers/${id}`;
+  const currentUser = async (id: string) => {
+    dispatch(getCurrentUserPending());
+    const endpoint = `/api/users/current${id}`;
     await instance
       .get(endpoint)
       .then((response) => {
-        dispatch(getLoginClientSuccess(response.data));
+        dispatch(getCurrentUserSuccess(response.data));
       })
       .catch((error) => {
         console.error(error);
-        dispatch(getLoginClientError());
+        dispatch(getCurrentUserError());
       });
   };
 
   return (
-    <ClientLoginStateContext.Provider value={state}>
-      <ClientLoginActionContext.Provider
+    <CurrentUserStateContext.Provider value={state}>
+      <CurrentUserActionContext.Provider
         value={{
-          getLoginClient,
+          currentUser,
         }}
       >
         {children}
-      </ClientLoginActionContext.Provider>
-    </ClientLoginStateContext.Provider>
+      </CurrentUserActionContext.Provider>
+    </CurrentUserStateContext.Provider>
   );
 };
 
-export const useLoginClienttState = () => {
-  const context = useContext(ClientLoginStateContext);
+export const useCurrentUsertState = () => {
+  const context = useContext(CurrentUserStateContext);
   if (!context) {
     throw new Error(
-      "useLoginClientState must be used within a LoginClientProvider"
+      "useCurrentUserState must be used within a CurrentUserProvider"
     );
   }
   return context;
 };
 
-export const useLoginClientActions = () => {
-  const context = useContext(ClientLoginActionContext);
+export const useCurrentUserActions = () => {
+  const context = useContext(CurrentUserActionContext);
   if (!context) {
     throw new Error(
-      "useLoginClientActions must be used within a LoginClientProvider"
+      "useCurrentUserActions must be used within a CurrentUserProvider"
     );
   }
   return context;
 };
-
-// const createTrainer = async (trainer: ITrainer) => {
-//   dispatch(createTrainerPending());
-//   const endpoint = `/trainers`;
-//   await instance
-//     .post(endpoint, trainer)
-//     .then((response) => {
-//       dispatch(createTrainerSuccess(response.data));
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//       dispatch(createTrainerError());
-//     });
-// };
-
-// const updateTrainer = async (trainer: ITrainer) => {
-//   dispatch(updateTrainerPending());
-//   const endpoint = `/trainers/${trainer.id}`;
-//   await instance
-//     .put(endpoint, trainer)
-//     .then((response) => {
-//       dispatch(updateTrainerSuccess(response.data));
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//       dispatch(updateTrainerError());
-//     });
-// };
-
-// const deleteTrainer = async (id: string) => {
-//   dispatch(deleteTrainerPending());
-//   const endpoint = `https://fakestoreapi.com/trainers/${id}`;
-//   await instance
-//     .delete(endpoint)
-//     .then((response) => {
-//       dispatch(deleteTrainerSuccess(response.data));
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//       dispatch(deleteTrainerError());
-//     });
-// };

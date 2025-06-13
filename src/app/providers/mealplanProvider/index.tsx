@@ -4,7 +4,7 @@ import {
   IMealplan,
   MealplanActionContext,
   MealplanStateContext,
-} from "../clientProvider copy/context";
+} from "./context";
 import { MealplanReducer } from "./reducer";
 import { useContext, useReducer } from "react";
 import {
@@ -22,8 +22,9 @@ import {
   deleteMealplanPending,
   deleteMealplanSuccess,
   deleteMealplanError,
-} from "../clientProvider copy/actions";
+} from "./actions";
 import axios from "axios";
+import { getMealplanSuccess } from "./actions";
 
 export const MealplanProvider = ({
   children,
@@ -52,7 +53,7 @@ export const MealplanProvider = ({
     await instance
       .get(endpoint)
       .then((response) => {
-        dispatch(getMealplansSuccess(response.data));
+        dispatch(getMealplanSuccess(response.data));
       })
       .catch((error) => {
         console.error(error);

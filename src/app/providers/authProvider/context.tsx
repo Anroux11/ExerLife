@@ -1,7 +1,5 @@
 import { createContext } from "react";
 
-// Interface defining the shape of a Product object
-// This represents the data structure we expect from the API
 export interface ITrainerRegister {
   name: string;
   email: string;
@@ -14,18 +12,12 @@ export interface ITrainerRegister {
   trial: boolean;
   policiesAccepted: boolean;
 }
-
-  // Interface defining the state shape for our context
-// This includes status flags and the actual product data
 export interface ITrainerRegisterStateContext {
   isPending: boolean; // Loading state
   isSuccess: boolean; // Success state
   isError: boolean; // Error state
   trainer?: ITrainerRegister; // Single product data (optional)
 }
-
-// Interface defining all the actions that can be performed on our products
-// These methods will be implemented in the provider component
 export interface ITrainerRegisterActionContext {
   // getTrainers: () => void; // Fetch all products
   registerTrainer: (id: string) => void; // Fetch a single product
@@ -34,21 +26,18 @@ export interface ITrainerRegisterActionContext {
   // deleteTrainer: (id: string) => void; // Delete a product
 }
 
-// Initial state object that defines the default values for our product context
 export const INITIAL_STATE_TRAINER: ITrainerRegisterStateContext = {
   isPending: false, // Indicates if a request is in progress
   isSuccess: false, // Indicates if the last operation was successful
   isError: false, // Indicates if the last operation resulted in an error
 };
 
-// Create two separate contexts:
-// 1. ProductStateContext - Holds the current state of our products
 export const TrainerRegisterStateContext =
   createContext<ITrainerRegisterStateContext>(INITIAL_STATE_TRAINER);
 
-// 2. ProductActionContext - Holds the methods to interact with our products
 export const TrainerRegisterActionContext =
   createContext<ITrainerRegisterActionContext>(undefined);
+
 
 export interface IClientRegister {
   name: string;
@@ -60,118 +49,101 @@ export interface IClientRegister {
   policiesAccepted: boolean;
 };
 
-export interface IUserLogin {
-  email: string;
-  password: string;
-};
-
-  // Interface defining the state shape for our context
-// This includes status flags and the actual product data
 export interface IClientRegisterStateContext {
   isPending: boolean; // Loading state
   isSuccess: boolean; // Success state
   isError: boolean; // Error state
   client?: IClientRegister; // Single product data (optional)
 }
-
-// Interface defining all the actions that can be performed on our products
-// These methods will be implemented in the provider component
 export interface IClientRegsiterActionContext {
   // getTrainers: () => void; // Fetch all products
-  getRegisterClient: (id: string) => void; // Fetch a single product
+  registerClient: (id: string) => void; // Fetch a single product
   // createTrainer: (product: ITrainer) => void; // Create a new product
   // updateTrainer: (product: ITrainer) => void; // Update existing product
   // deleteTrainer: (id: string) => void; // Delete a product
 }
 
-// Initial state object that defines the default values for our product context
 export const INITIAL_STATE_CLIENT: IClientRegisterStateContext = {
   isPending: false, // Indicates if a request is in progress
   isSuccess: false, // Indicates if the last operation was successful
   isError: false, // Indicates if the last operation resulted in an error
 };
 
-// Create two separate contexts:
-// 1. ProductStateContext - Holds the current state of our products
 export const ClientRegisterStateContext =
   createContext<IClientRegisterStateContext>(INITIAL_STATE_CLIENT);
 
-// 2. ProductActionContext - Holds the methods to interact with our products
+
 export const ClientRegisterActionContext =
   createContext<IClientRegsiterActionContext>(undefined);
 
 
-
-  // Interface defining the state shape for our context
-// This includes status flags and the actual product data
-export interface ITrainerLoginStateContext {
+export interface IUserLogin {
+  email: string;
+  password: string;
+};
+export interface IUserLoginStateContext {
   isPending: boolean; // Loading state
   isSuccess: boolean; // Success state
   isError: boolean; // Error state
-  trainer?: IUserLogin; // Single product data (optional)
+  user?: IUserLogin; // Single product data (optional)
 }
 
-// Interface defining all the actions that can be performed on our products
-// These methods will be implemented in the provider component
-export interface ITrainerLoginActionContext {
+export interface IUserLoginActionContext {
   // getTrainers: () => void; // Fetch all products
-  loginTrainer: (trainer: IUserLogin) => void; // Fetch a single product
+  userLogin: (id: string) => void; // Fetch a single product
   // createTrainer: (product: ITrainer) => void; // Create a new product
   // updateTrainer: (product: ITrainer) => void; // Update existing product
   // deleteTrainer: (id: string) => void; // Delete a product
 }
 
-// Initial state object that defines the default values for our product context
-export const INITIAL_STATE_USER: ITrainerLoginStateContext = {
+export const INITIAL_STATE_USER: IUserLoginStateContext = {
   isPending: false, // Indicates if a request is in progress
   isSuccess: false, // Indicates if the last operation was successful
   isError: false, // Indicates if the last operation resulted in an error
 };
 
-// Create two separate contexts:
-// 1. ProductStateContext - Holds the current state of our products
-export const TrainerLoginStateContext =
-  createContext<ITrainerLoginStateContext>(INITIAL_STATE);
+export const UserLoginStateContext =
+  createContext<IUserLoginStateContext>(INITIAL_STATE_USER);
 
-// 2. ProductActionContext - Holds the methods to interact with our products
-export const TrainerLoginActionContext =
-  createContext<ITrainerLoginActionContext>(undefined);
+export const UserLoginActionContext =
+  createContext<IUserLoginActionContext>(undefined);
 
-
-
-  // Interface defining the state shape for our context
-// This includes status flags and the actual product data
-export interface IClientLoginStateContext {
+export interface ICurrentUser {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  contactNumber: number;
+  activeState: boolean;
+  planType: string;
+  trial: boolean;
+  date: string;
+}
+export interface ICurrentUserStateContext {
   isPending: boolean; // Loading state
   isSuccess: boolean; // Success state
   isError: boolean; // Error state
-  client?: IUserLogin; // Single product data (optional)
+  currentUser?: ICurrentUser; // Single product data (optional)
 }
-
-// Interface defining all the actions that can be performed on our products
-// These methods will be implemented in the provider component
-export interface IClientLoginActionContext {
+export interface ICurrentUserActionContext {
   // getTrainers: () => void; // Fetch all products
-  getLoginClient: (id: string) => void; // Fetch a single product
+  currentUser: (id: string) => void; // Fetch a single product
   // createTrainer: (product: ITrainer) => void; // Create a new product
   // updateTrainer: (product: ITrainer) => void; // Update existing product
-  // deleteTrainer: (id: string) => void; // Delete a product
+  // deleteTrainer: (id: string) => void; // Delete a product                                                                                                                       
 }
 
-// Initial state object that defines the default values for our product context
-export const INITIAL_STATE: IClientLoginStateContext = {
+export const INITIAL_STATE_CURRENT: ICurrentUserStateContext = {
   isPending: false, // Indicates if a request is in progress
   isSuccess: false, // Indicates if the last operation was successful
   isError: false, // Indicates if the last operation resulted in an error
 };
 
-// Create two separate contexts:
-// 1. ProductStateContext - Holds the current state of our products
-export const ClientLoginStateContext =
-  createContext<IClientLoginStateContext>(INITIAL_STATE);
+export const CurrentUserStateContext = createContext<ICurrentUserStateContext>(
+  INITIAL_STATE_CURRENT
+);
 
-// 2. ProductActionContext - Holds the methods to interact with our products
-export const ClientLoginActionContext =
-  createContext<IClientLoginActionContext>(undefined);
+export const CurrentUserActionContext =
+  createContext<ICurrentUserActionContext>(undefined);
 
 

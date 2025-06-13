@@ -31,8 +31,8 @@ export interface IFooditemStateContext {
 export interface IFooditemActionContext {
   getFooditems: () => void; // Fetch all products
   getFooditem: (id: string) => void; // Fetch a single product
-  createFooditem: (product: IFooditem) => void; // Create a new product
-  updateFooditem: (product: IFooditem) => void; // Update existing product
+  createFooditem: (fooditem: IFooditem) => void; // Create a new product
+  updateFooditem: (fooditem: IFooditem) => void; // Update existing product
   deleteFooditem: (id: string) => void; // Delete a product
 }
 

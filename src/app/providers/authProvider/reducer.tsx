@@ -1,6 +1,6 @@
 import { handleActions } from "redux-actions";
-import { IClientLoginStateContext, IClientRegisterStateContext, INITIAL_STATE, ITrainerLoginStateContext, ITrainerRegisterStateContext } from "./context";
-import { TrainerRegisterActionEnums, ClientRegisterActionEnum, TrainerLoginActionEnum, ClientLoginActionEnum } from './actions';
+import { IClientRegisterStateContext, ICurrentUserStateContext, INITIAL_STATE_CLIENT, INITIAL_STATE_CURRENT, INITIAL_STATE_TRAINER, INITIAL_STATE_USER, ITrainerRegisterStateContext, IUserLoginStateContext } from "./context";
+import { TrainerRegisterActionEnums, ClientRegisterActionEnum, UserLoginActionEnum, CurrentUserActionEnum } from './actions';
 
 export const RegisterTrainerReducer = handleActions<
 ITrainerRegisterStateContext
@@ -19,7 +19,7 @@ ITrainerRegisterStateContext
       ...action.payload,
     }),
   },
-  INITIAL_STATE
+  INITIAL_STATE_TRAINER
 );
 
 export const RegisterClientReducer = handleActions<
@@ -39,47 +39,43 @@ export const RegisterClientReducer = handleActions<
       ...action.payload,
     }),
   },
-  INITIAL_STATE
+  INITIAL_STATE_CLIENT
 );
 
-export const LoginTrainerReducer = handleActions<
-  ITrainerLoginStateContext
->(
+export const UserLoginReducer = handleActions<IUserLoginStateContext>(
   {
-    [TrainerLoginActionEnum.getLoginTrainerPending]: (state, action) => ({
+    [UserLoginActionEnum.getUserLoginPending]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
-    [TrainerLoginActionEnum.getLoginTrainerSuccess]: (state, action) => ({
+    [UserLoginActionEnum.getUserLoginSuccess]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
-    [TrainerLoginActionEnum.getLoginTrainerError]: (state, action) => ({
+    [UserLoginActionEnum.getUserLoginError]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
   },
-  INITIAL_STATE
+  INITIAL_STATE_USER
 );
 
-export const LoginClientReducer = handleActions<
-  IClientLoginStateContext
->(
+export const CurrentUserReducer = handleActions<ICurrentUserStateContext>(
   {
-    [ClientLoginActionEnum.getLoginClientPending]: (state, action) => ({
+    [CurrentUserActionEnum.getCurrentUserPending]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
-    [ClientLoginActionEnum.getLoginClientSuccess]: (state, action) => ({
+    [CurrentUserActionEnum.getCurrentUserSuccess]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
-    [ClientLoginActionEnum.getLoginClientError]: (state, action) => ({
+    [CurrentUserActionEnum.getCurrentUserError]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
   },
-  INITIAL_STATE
+  INITIAL_STATE_CURRENT
 );
     
     
