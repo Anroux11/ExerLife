@@ -25,11 +25,11 @@ const Page: React.FC = () => {
 
         <div className={styles.container}>
           <>
-            <h1 className={styles.bigHeading}>Hello</h1>
+            <h1 className={styles.bigHeading}>Welcome to ExerLife</h1>
           </>
 
           <>
-            <h2 className={styles.smallHeading}>Hello</h2>
+            <h2 className={styles.smallHeading}>Be Fit...Always</h2>
           </>
 
           <div className={styles.buttonContainer}>
