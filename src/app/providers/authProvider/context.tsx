@@ -13,14 +13,14 @@ export interface ITrainerRegister {
   policiesAccepted: boolean;
 }
 export interface ITrainerRegisterStateContext {
-  isPending: boolean; // Loading state
-  isSuccess: boolean; // Success state
-  isError: boolean; // Error state
-  trainer?: ITrainerRegister; // Single product data (optional)
+  isPending: boolean; 
+  isSuccess: boolean; 
+  isError: boolean; 
+  trainer?: ITrainerRegister; 
 }
 export interface ITrainerRegisterActionContext {
   // getTrainers: () => void; // Fetch all products
-  registerTrainer: (id: string) => void; // Fetch a single product
+  registerTrainer: (payload: ITrainerRegister) => void; // Fetch a single product
   // createTrainer: (product: ITrainer) => void; // Create a new product
   // updateTrainer: (product: ITrainer) => void; // Update existing product
   // deleteTrainer: (id: string) => void; // Delete a product
@@ -58,7 +58,7 @@ export interface IClientRegisterStateContext {
 }
 export interface IClientRegsiterActionContext {
   // getTrainers: () => void; // Fetch all products
-  registerClient: (id: string) => void; // Fetch a single product
+  registerClient: (payload: IClientRegister) => void; // Fetch a single product
   // createTrainer: (product: ITrainer) => void; // Create a new product
   // updateTrainer: (product: ITrainer) => void; // Update existing product
   // deleteTrainer: (id: string) => void; // Delete a product
@@ -92,7 +92,7 @@ export interface IUserLoginStateContext {
 
 export interface IUserLoginActionContext {
   // getTrainers: () => void; // Fetch all products
-  userLogin: (id: string) => void; // Fetch a single product
+  userLogin: (payload: IUserLogin) => void; // Fetch a single product
   // createTrainer: (product: ITrainer) => void; // Create a new product
   // updateTrainer: (product: ITrainer) => void; // Update existing product
   // deleteTrainer: (id: string) => void; // Delete a product
@@ -129,7 +129,7 @@ export interface ICurrentUserStateContext {
 }
 export interface ICurrentUserActionContext {
   // getTrainers: () => void; // Fetch all products
-  currentUser: (id: string) => void; // Fetch a single product
+  currentUser: () => void; // Fetch a single product
   // createTrainer: (product: ITrainer) => void; // Create a new product
   // updateTrainer: (product: ITrainer) => void; // Update existing product
   // deleteTrainer: (id: string) => void; // Delete a product                                                                                                                       

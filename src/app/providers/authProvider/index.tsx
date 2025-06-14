@@ -12,6 +12,9 @@ import {
   INITIAL_STATE_CLIENT,
   INITIAL_STATE_USER,
   INITIAL_STATE_CURRENT,
+  ITrainerRegister,
+  IClientRegister,
+  IUserLogin,
 } from "./context";
 import {
   CurrentUserReducer,
@@ -43,11 +46,11 @@ export const TrainerRegisterProvider = ({
   const [state, dispatch] = useReducer(RegisterTrainerReducer, INITIAL_STATE_TRAINER);
   const instance = getAxiosInstace();
 
-  const registerTrainer = async (id: string) => {
+  const registerTrainer = async (payload: ITrainerRegister) => {
     dispatch(getRegisterTrainerPending());
-    const endpoint = `/api/users/register${id}`;
+    const endpoint = `/api/users/register`;
     await instance
-      .get(endpoint)
+      .post(endpoint, payload)
       .then((response) => {
         dispatch(getRegisterTrainerSuccess(response.data));
       })
@@ -98,11 +101,11 @@ export const ClientRegisterProvider = ({
   const [state, dispatch] = useReducer(RegisterClientReducer, INITIAL_STATE_CLIENT);
   const instance = getAxiosInstace();
 
-  const registerClient = async (id: string) => {
+  const registerClient = async (payload: IClientRegister) => {
     dispatch(getRegisterClientPending());
-    const endpoint = `/api/users/register/mobile${id}`;
+    const endpoint = `/api/users/register/mobile`;
     await instance
-      .get(endpoint)
+      .post(endpoint, payload)
       .then((response) => {
         dispatch(getRegisterClientSuccess(response.data));
       })
@@ -153,11 +156,11 @@ export const UserLoginProvider = ({
   const [state, dispatch] = useReducer(UserLoginReducer, INITIAL_STATE_USER);
   const instance = getAxiosInstace();
 
-  const userLogin = async (id: string) => {
+  const userLogin = async (payload: IUserLogin) => {
     dispatch(getUserLoginPending());
-    const endpoint = ` /api/users/login${id}`;
+    const endpoint = ` /api/users/login`;
     await instance
-      .get(endpoint)
+      .post(endpoint, payload)
       .then((response) => {
         dispatch(getUserLoginSuccess(response.data));
       })
@@ -208,9 +211,9 @@ export const CurrentUserProvider = ({
   const [state, dispatch] = useReducer(CurrentUserReducer, INITIAL_STATE_CURRENT);
   const instance = getAxiosInstace();
 
-  const currentUser = async (id: string) => {
+  const currentUser = async () => {
     dispatch(getCurrentUserPending());
-    const endpoint = `/api/users/current${id}`;
+    const endpoint = `/api/users/current`;
     await instance
       .get(endpoint)
       .then((response) => {
